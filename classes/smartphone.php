@@ -1,8 +1,11 @@
 <?php
 
 require_once (__DIR__ . "./product.php");
+require_once (__DIR__ . "./../traits/utilities.php");
+
 
 class Smartphone extends Product {
+    use Utilities;
     private $modello;
     private $capacitaMemoria;
 
@@ -17,7 +20,8 @@ class Smartphone extends Product {
     }
 
     public function setModello ($value) {
-        $this->modello = $value;
+
+        $this->modello = $this->toUpperCase($value);
     }
 
     public function getModello() {
