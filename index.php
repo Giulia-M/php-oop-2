@@ -6,31 +6,34 @@ require_once ("./classes/user.php");
 require_once ("./classes/userPremium.php");
 require_once ("./classes/cartaCredito.php");
 
-
-$smartphone= new Smartphone("‎Oppo A52", "4gb", "oppo", 139.99);
-
 // $smartphone->setMarchio("Oppo");
 // $smartphone->setPrezzo(139.99);
 
-echo $smartphone->render();
+try {
+    
+    $smartphone= new Smartphone("‎Oppo A52", "4gb", "oppo", 139.99);
+    $userPremium= new UserPremium("Gino", "Rossi", 10, "gino@gmail.com", 27);
+    echo $smartphone->render();
+    var_dump($smartphone);
+    $carta= new CartaCredito("x", $userPremium, "01/2025", 847);
+    $userPremium->aggiungiCartaCredito($carta);
+    echo $userPremium->render();
+    var_dump($userPremium);
 
 
-var_dump($smartphone);
+} catch(Exception $e) {
+    var_dump($e->getMessage());
+}
 
-
-
-//10 è sconto esclusivo ..come lo collego ?
-$userPremium= new UserPremium("Gino", "Rossi", 10);
 // $userPremium->setNome("Gino");
 // $userPremium->setCognome("Rossi");
 
-//PROBLEMA ??
-echo $userPremium->render();
+
 //
-$carta= new CartaCredito("x", $userPremium );
 
+// var_dump($carta->getExpiration());
 // var_dump($carta);
-$userPremium->aggiungiCartaCredito($carta);
 
-var_dump($userPremium);
+
+
 

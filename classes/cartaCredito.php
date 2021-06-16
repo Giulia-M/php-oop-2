@@ -3,10 +3,18 @@
 class CartaCredito {
     private $numeroCarta;
     private $intestatario;
-    public function __construct($nCarta, $intestatario)
+    
+
+    protected $expiration;
+    protected $cvv;
+  
+    public function __construct($nCarta, $intestatario, $expiration, $cvv)
     {
         $this->numeroCarta = $nCarta;
         $this->intestatario = $intestatario;
+        $this->cvv = $cvv;
+  
+        $this->setExpiration($expiration);
 
        
     }
@@ -16,6 +24,21 @@ class CartaCredito {
     }
     public function getIntestatario() {
         return $this->intestatario;
+    }
+
+  
+    public function setExpiration($value) {
+      $date = date_create_from_format("m/Y", $value);
+        
+      $now = new DateTime();
+      if($date < $now) {
+          throw new Exception("la carta di credito è scaduta");
+      }
+      $this->expiration = $date;
+    }
+  
+    public function getExpiration() {
+      return date_format($this->expiration, "m/Y");
     }
 }
 /*

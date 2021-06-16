@@ -1,8 +1,8 @@
 <?php
 
 class Product {
-    private $marchio;
-    private $prezzo;
+    protected $marchio;
+    protected $prezzo;
 
     public function setMarchio ($value) {
         $this->marchio = $value;
